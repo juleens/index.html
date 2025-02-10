@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mochi's Valentine Adventure</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            background-color: #ffebf1;
+        }
+        #game-container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+        }
+        #game-image {
+            width: 200px;
+            height: auto;
+            border-radius: 10px;
+        }
+        .button {
+            background-color: #ff69b4;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .button:hover {
+            background-color: #d14792;
+        }
+        #message {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="game-container">
+        <h2>🐱 Mochi's Valentine’s Adventure 🐱</h2>
+        <img id="game-image" src="https://i.imgur.com/R8KMLZT.png" alt="Mochi the Cat">
+        <p id="story">Mochi needs your help to deliver a special Valentine’s message! 💌</p>
+        <button class="button" onclick="startGame()">Help Mochi!</button>
+        <div id="message"></div>
+    </div>
+
+    <script>
+        let step = 0;
+
+        function startGame() {
+            let message = document.getElementById("message");
+            let story = document.getElementById("story");
+
+            if (step === 0) {
+                story.innerHTML = "Task 1: Click the floating hearts to make Mochi happy! ❤️";
+                message.innerHTML = '<button class="button" onclick="nextStep()">Click the hearts! 💖</button>';
+            } else if (step === 1) {
+                story.innerHTML = "Task 2: Choose Mochi’s favorite treat!";
+                message.innerHTML = '<button class="button" onclick="fail()">Chocolate 🍫</button>' +
+                                    '<button class="button" onclick="fail()">Milk 🥛</button>' +
+                                    '<button class="button" onclick="nextStep()">Fish 🐟</button>';
+            } else if (step === 2) {
+                story.innerHTML = "Task 3: Find the hidden Valentine’s card!";
+                message.innerHTML = '<button class="button" onclick="nextStep()">Click to find it! 💌</button>';
+            } else if (step === 3) {
+                story.innerHTML = "Mochi has something important to say! 🥰";
+                message.innerHTML = '<button class="button" onclick="revealMessage()">Reveal message 💖</button>';
+            }
+        }
+
+        function nextStep() {
+            step++;
+            startGame();
+        }
+
+        function fail() {
+            alert("Oops! Mochi doesn't like that. Try again!");
+        }
+
+        function revealMessage() {
+            let story = document.getElementById("story");
+            let message = document.getElementById("message");
+
+            story.innerHTML = "Will you be my Valentine? 💕";
+            message.innerHTML = '<button class="button" onclick="happyEnding()">YES! 💖</button>' +
+                                '<button class="button" onclick="sadEnding()">No... 😿</button>';
+        }
+
+        function happyEnding() {
+            document.getElementById("story").innerHTML = "YAY! Mochi is so happy! 🥳💕";
+            document.getElementById("message").innerHTML = "You made my human the happiest person in the world! 🥰";
+        }
+
+        function sadEnding() {
+            document.getElementById("story").innerHTML = "Mochi is sad... but still loves you. 😿";
+            document.getElementById("message").innerHTML = "I guess my mission failed... but I'll always love you! 💔";
+        }
+    </script>
+
+</body>
+</html>
